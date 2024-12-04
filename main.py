@@ -1,3 +1,6 @@
+""""
+My simple MQTT client
+""""
 import network
 import time
 from umqtt.simple import MQTTClient
