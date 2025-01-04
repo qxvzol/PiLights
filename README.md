@@ -49,3 +49,5 @@ light/switch [on/off]       # turn light on or off  (subscribe)
 mosquitto_pub -h localhost -t light/switch -m "on"
 mosquitto_pub -h localhost -t light/switch -m "off"
 ~~~
+
+## Week 4 - 4/1/25

@@ -3,13 +3,9 @@ My simple MQTT client
 """
 import network
 import time
-from umqtt.simple import MQTTClient
-
-from machine import Pin
+from ha_mqtt_light import HA_MQTT_light
 
 from secret import ssid, password, mqtt_server
-
-led = Pin("LED", Pin.OUT)
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -30,25 +26,12 @@ else:
     status = wlan.ifconfig()
     print( 'ip = ' + status[0] )
 
-def callback(topic, msg):
-    print('received message %s on topic %s' % (msg, topic))
-    if msg==b'on':
-        led.on()
-    elif msg==b'off':
-        led.off()
-    else:
-        print("error not understood")
-
-client = MQTTClient(client_id="pylights",server=mqtt_server)
-client.set_callback(callback)
-client.connect()
-
-client.publish("light/state", msg="OFF")
-client.subscribe("light/switch/#")
+ha_led = HA_MQTT_light("pi_led",mqtt_server)
+ha_led.publish_discovery_info()
 
 try:
     while True:
-        client.wait_msg()
+        ha_led.client.wait_msg()
 finally:
     print("Finished.")
-    client.disconnect()
+    ha_led.client.disconnect()
