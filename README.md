@@ -59,4 +59,4 @@ mosquitto_pub -h localhost -t light/switch -m "off"
 
 * I moved part of the code from main to a seperate file containing a python class (ha_mqtt_light)
 * After some debugging using mosquito_sub, we managed to publish a config topic to home assistant, so it discovered my light
-* This let me control the light remotley on the board from Home Assistant
+* This let me control the light remotley on the board from Homeassistant
