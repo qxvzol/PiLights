@@ -60,3 +60,15 @@ mosquitto_pub -h localhost -t light/switch -m "off"
 * I moved part of the code from main to a seperate file containing a python class (ha_mqtt_light)
 * After some debugging using mosquito_sub, we managed to publish a config topic to home assistant, so it discovered my light
 * This let me control the light remotley on the board from Homeassistant
+
+## Week 5 - 30/1/25
+
+* I did some research on individually adressable RGB LEDs; I used this video to compare between different options;
+[Youtube Video](https://www.youtube.com/watch?v=QnvircC22hU)
+* I chose and ordered the sk6812 LED strip as it was RGBW where other options were only RGB
+* Once it had arrived I had to solder the power supply connector to the light strip, and a connector to the Pico board to plug into the LED strip
+* Later I used the neopixel library from GitHub to control and test the lights;
+[Neopixel GitHub Repository](https://github.com/blaz-r/pi_pico_neopixel)
+
+![](assets/Soldering.PNG "Image of Soldering")
+![](assets/Lights_Image.PNG "Lights Working")
