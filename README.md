@@ -72,3 +72,12 @@ mosquitto_pub -h localhost -t light/switch -m "off"
 
 ![](assets/Soldering.PNG "Image of Soldering")
 ![](assets/Lights_Image.PNG "Lights Working")
+
+## Week 6 - 5/2/25
+
+* This week we got the LED strip to be controlled from homeassistant using MQTT
+* This took a lot of debugging because Homeassistant had very strict rules on format
+* We managed to get it working as a basic on/off switch;
+next we want to be able to control colours without editing the code
+
+![](assets/Homeassistant_Switch.PNG "Homeassistant Switch")

@@ -28,6 +28,7 @@ else:
 
 ha_led = HA_MQTT_light("pi_led",mqtt_server)
 ha_led.publish_discovery_info()
+ha_led.publish_state_info()
 
 try:
     while True:
