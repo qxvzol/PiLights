@@ -7,10 +7,13 @@ from ha_mqtt_light import HA_MQTT_light
 
 from secret import ssid, password, mqtt_server
 
+
+
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 wlan.connect(ssid, password)
 
+# Wait for connect or fail
 max_wait = 10
 while max_wait > 0:
     if wlan.status() < 0 or wlan.status() >= 3:
@@ -19,6 +22,7 @@ while max_wait > 0:
     print('waiting for connection...')
     time.sleep(1)
 
+# Handle connection error
 if wlan.status() != 3:
     raise RuntimeError('network connection failed')
 else:
@@ -28,6 +32,7 @@ else:
 
 ha_led = HA_MQTT_light("pi_led",mqtt_server)
 ha_led.publish_discovery_info()
+time.sleep(1)
 ha_led.publish_state_info()
 
 try:

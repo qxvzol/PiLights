@@ -81,3 +81,9 @@ mosquitto_pub -h localhost -t light/switch -m "off"
 next we want to be able to control colours without editing the code
 
 ![](assets/Homeassistant_Switch.PNG "Homeassistant Switch")
+
+## Week 7 - 4/3/25
+
+* This week we spent a lot of time trying to get homeassistant to be compatible with the RGB and brightness controls
+* We had to spend a while researching the message format and then debugging our code
+* By the end we had the messages being sent and recieved correctly but ran out of time before implementing the light control
