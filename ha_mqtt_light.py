@@ -31,6 +31,8 @@ class HA_MQTT_light:
         self.availability_topic=self.base_topic+"/available"
         self.state_topic=self.base_topic+"/state"
         self.led_value = OFF
+        self.brightness = 10
+        self.last_rgbw = (0,0,0,self.brightness)
         
         def callback(topic,msg):
             self.process_recieved_switch_info(topic,msg)
@@ -45,14 +47,26 @@ class HA_MQTT_light:
 
     def process_recieved_switch_info(self,topic,msg):
         print('received message %s on topic %s' % (msg, topic))
+        tpc_str = topic.decode("utf-8")
         if msg==b'ON':
-            self.pixels.fill((0,0,0,255))
+            self.pixels.fill(self.last_rgbw)
             self.pixels.show()
             self.led_value = ON
         elif msg==b'OFF':
             self.pixels.fill((0,0,0,0))
             self.pixels.show()
+            self.last_rgbw = (0,0,0,self.brightness)
             self.led_value = OFF
+        elif tpc_str==self.base_command_topic+"/brightness":
+            self.brightness=int(msg)
+            self.last_rgbw=(0,0,0,self.brightness)
+            self.pixels.fill(self.last_rgbw)
+            self.pixels.show()
+        elif tpc_str==self.base_command_topic+"/rgb":
+            rgb = msg.decode('utf-8').split(',')
+            self.last_rgbw=(int(rgb[1]), int(rgb[0]), int(rgb[2]),0)
+            self.pixels.fill(self.last_rgbw)
+            self.pixels.show()
         else:
             print("error not understood")
         self.publish_state_info()
@@ -65,6 +79,7 @@ class HA_MQTT_light:
             "availability_topic": self.availability_topic,
             "unique_id": self.dev_name,
             "device": self.device_cfg,
+            "supported_color_modes": ["rgbw"],
             "brightness_state_topic": self.base_topic+"/brightness/status",
             "brightness_command_topic": self.base_command_topic+"/brightness",
             "rgb_state_topic": self.base_topic+"/rgb/status",

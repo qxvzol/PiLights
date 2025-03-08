@@ -87,3 +87,12 @@ next we want to be able to control colours without editing the code
 * This week we spent a lot of time trying to get homeassistant to be compatible with the RGB and brightness controls
 * We had to spend a while researching the message format and then debugging our code
 * By the end we had the messages being sent and recieved correctly but ran out of time before implementing the light control
+
+## Week 8 8/3/25
+
+* We only spent an hour but we made good progress as we've sorted out most of the hard parts
+* We managed to get the homeassistant RGB and brightness controls to control the light
+* Unfortunately we were unable to get homeassistant to output a whiteness value
+
+![](assets/Homeassistant_Controls.PNG "Homeassistant Controls")
+![](assets/Lights_Working.jpg "RGB Lights")
